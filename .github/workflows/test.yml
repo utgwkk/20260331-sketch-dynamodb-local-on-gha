@@ -9,10 +9,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: docker compose up -d
-      - uses: aws-actions/configure-aws-credentials@v6.0.0
-        with:
-          aws-access-key-id: DUMMY
-          aws-secret-access-key: DUMMY
-          aws-region: ap-northeast-1
+      - uses: ankurk91/install-aws-cli-action@v1
+      - name: Set up credentials
+        run: |
+          echo AWS_REGION=ap-northeast-1 >> $GITHUB_ENV
+          echo AWS_ACCESS_KEY_ID=dummy >> $GITHUB_ENV
+          echo AWS_SECRET_ACCESS_KEY=dummy >> $GITHUB_ENV
       - run: curl http://localhost:8000
       - run: aws --endpoint-url=http://localhost:8000 dynamodb list-tables
