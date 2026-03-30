@@ -15,4 +15,4 @@ jobs:
           aws-secret-access-key: DUMMY
           aws-region: ap-northeast-1
       - run: curl http://localhost:8000
-      - run: aws --endpoint=http://localhost:8000 dynamodb list-tables
+      - run: aws --endpoint-url=http://localhost:8000 dynamodb list-tables
