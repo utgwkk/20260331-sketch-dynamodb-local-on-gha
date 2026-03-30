@@ -1,0 +1,18 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker compose up -d
+      - uses: aws-actions/configure-aws-credentials@v6.0.0
+        with:
+          aws-access-key-id: DUMMY
+          aws-secret-access-key: DUMMY
+          aws-region: DUMMY
+      - run: curl http://localhost:8000
+      - run: aws --endpoint=http://localhost:8000 dynamodb list-tables
