@@ -9,7 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: docker compose up -d
-      - uses: ankurk91/install-aws-cli-action@v1
       - name: Set up credentials
         run: |
           echo AWS_REGION=ap-northeast-1 >> $GITHUB_ENV
