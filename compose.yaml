@@ -5,8 +5,6 @@ services:
     volumes:
       - "./docker/dynamodb:/home/dynamodblocal/data"
     working_dir: /home/dynamodblocal
-    networks:
-      - dynamodb
   dynamodb-local-proxy:
     image: ghcr.io/utgwkk/dynamodb-local-proxy
     environment:
@@ -15,8 +13,5 @@ services:
       - PORT=8888
     ports:
       - "8888:8888"
-    networks:
-      - dynamodb
-
-networks:
-  dynamodb:
+    depends_on:
+      - dynamodb-local
