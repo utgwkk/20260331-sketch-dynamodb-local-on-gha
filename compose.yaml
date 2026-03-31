@@ -13,5 +13,3 @@ services:
       - PORT=8888
     ports:
       - "8888:8888"
-    depends_on:
-      - dynamodb-local
