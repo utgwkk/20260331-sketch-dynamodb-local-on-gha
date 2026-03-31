@@ -20,4 +20,3 @@ services:
 
 networks:
   dynamodb:
-    driver: bridge
