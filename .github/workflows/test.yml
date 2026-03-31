@@ -17,4 +17,6 @@ jobs:
           echo AWS_SECRET_ACCESS_KEY=dummy >> $GITHUB_ENV
       - run: curl http://localhost:8000
       - run: aws --endpoint-url=http://localhost:8000 dynamodb list-tables
+        timeout-minutes: 1
       - run: aws --endpoint-url=http://localhost:8000 dynamodb describe-table --table-name test
+        timeout-minutes: 1

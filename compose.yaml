@@ -1,6 +1,23 @@
 services:
   dynamodb-local:
-    command: -jar DynamoDBLocal.jar -sharedDb -inMemory
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath ./data
     image: amazon/dynamodb-local
+    volumes:
+      - "./docker/dynamodb:/home/dynamodblocal/data"
+    working_dir: /home/dynamodblocal
+    networks:
+      - dynamodb
+  dynamodb-local-proxy:
+    image: ghcr.io/utgwkk/dynamodb-local-proxy
+    environment:
+      - DYNAMODB_LOCAL_ADDR=dynamodb-local:8000
+      - HOST=0.0.0.0
+      - PORT=8888
     ports:
-      - "8000:8000"
+      - "8888:8888"
+    networks:
+      - dynamodb
+
+networks:
+  dynamodb:
+    driver: bridge
