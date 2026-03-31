@@ -6,9 +6,19 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      dynamodb-local:
+        image: amazon/dynamodb-local
+      dynamodb-local-proxy:
+        image: ghcr.io/utgwkk/dynamodb-local-proxy
+        env:
+          DYNAMODB_LOCAL_ADDR: dynamodb-local:8000
+          HOST: 0.0.0.0
+          PORT: 8888
+        ports:
+          - 8888:8888
     steps:
       - uses: actions/checkout@v6
-      - run: docker compose up -d
       - name: Set up credentials
         run: |
           echo AWS_REGION=ap-northeast-1 >> $GITHUB_ENV
