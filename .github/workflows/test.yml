@@ -15,8 +15,8 @@ jobs:
           echo AWS_REGION=ap-northeast-1 >> $GITHUB_ENV
           echo AWS_ACCESS_KEY_ID=dummy >> $GITHUB_ENV
           echo AWS_SECRET_ACCESS_KEY=dummy >> $GITHUB_ENV
-      - run: curl http://localhost:8000
-      - run: aws --endpoint-url=http://localhost:8000 dynamodb list-tables
+      - run: curl http://localhost:8888
+      - run: aws --endpoint-url=http://localhost:8888 dynamodb list-tables
         timeout-minutes: 1
-      - run: aws --endpoint-url=http://localhost:8000 dynamodb describe-table --table-name test
+      - run: aws --endpoint-url=http://localhost:8888 dynamodb describe-table --table-name test
         timeout-minutes: 1
